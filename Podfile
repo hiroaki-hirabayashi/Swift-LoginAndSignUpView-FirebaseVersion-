@@ -8,6 +8,8 @@ target 'Swift-LoginAndSignUpView-FirebaseVersion-' do
   # Pods for Swift-LoginAndSignUpView-FirebaseVersion-
 
   pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
 
   target 'Swift-LoginAndSignUpView-FirebaseVersion-Tests' do
     inherit! :search_paths

@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import Firebase
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -42,7 +43,7 @@ class ViewController: UIViewController {
         registerButton.backgroundColor = UIColor.rgb(red: 255, green: 221, blue: 187)
     }
     
-    @objc func showKeyboard(notification: Notification) {
+    @objc private func showKeyboard(notification: Notification) {
         let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         // キーボード出現時にViewを持ち上げてテキストフィールドが隠れないようにする
         guard let keyboardMinY = keyboardFrame?.minY else { return }
@@ -56,7 +57,7 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func hideKeyboard() {
+    @objc private func hideKeyboard() {
         // キーボードが隠れた時に元の位置に戻す
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: [],  animations: {
             self.view.transform = .identity
@@ -66,6 +67,36 @@ class ViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
+    @IBAction private func tappedRegistarButton(_ sender: Any) {
+        handleAuthToFirebase()
+    }
+    
+    private func handleAuthToFirebase() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (response, error) in
+            if let error = error {
+                print("認証情報の保存に失敗しました。\(error)")
+                return
+            }
+        }
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let name = self.userNameTextField.text else { return }
+        
+        let docDate = [ "name": name, "email": email, "createdAt": Timestamp()] as [String : Any]
+        // コレクションは"uesrs" ドキュメントにuid  Dateにname、email、時間
+        Firestore.firestore().collection("users").document(uid).setData(docDate) { (error) in
+            if let error = error {
+                print("Firestoreへの認証に失敗しました。\(error)")
+                return
+            }
+            print("Firestoreへの保存に成功しました。")
+        }
+    }
+    
 }
 
 
