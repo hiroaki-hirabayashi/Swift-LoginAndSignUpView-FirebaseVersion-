@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_Swift_LoginAndSignUpView_FirebaseVersion_Tests : NSObject
+@end
+@implementation PodsDummy_Pods_Swift_LoginAndSignUpView_FirebaseVersion_Tests
+@end

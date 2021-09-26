@@ -1,0 +1,6 @@
+framework module Pods_Swift_LoginAndSignUpView_FirebaseVersion_Tests {
+  umbrella header "Pods-Swift-LoginAndSignUpView-FirebaseVersion-Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}
