@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cpk-mR-qdj">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="hhB-vW-fmN">
+            <objects>
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cpk-mR-qdj" customClass="HomeViewController" customModule="Swift_LoginAndSignUpView_FirebaseVersion_" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NLG-m0-jb0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fby-64-m7h">
+                                <rect key="frame" x="88" y="184" width="238" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="さん、ようこそ!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWd-Y1-cuz">
+                                <rect key="frame" x="133" y="356" width="148.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="メールアドレス" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lj0-yf-JcJ">
+                                <rect key="frame" x="135.5" y="400" width="143" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="作成日:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYN-Rt-tlf">
+                                <rect key="frame" x="174" y="444" width="66.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ft0-th-Gpv">
+                                <rect key="frame" x="107" y="538" width="200" height="50"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Rl5-Go-7RR"/>
+                                    <constraint firstAttribute="height" constant="50" id="fhS-70-RKN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.82352941180000006" green="0.94509803920000002" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g8o-9W-k68"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sYN-Rt-tlf" firstAttribute="top" secondItem="Lj0-yf-JcJ" secondAttribute="bottom" constant="20" id="EEn-PI-znu"/>
+                            <constraint firstItem="fby-64-m7h" firstAttribute="centerX" secondItem="NLG-m0-jb0" secondAttribute="centerX" id="HXv-8s-9If"/>
+                            <constraint firstItem="fby-64-m7h" firstAttribute="top" secondItem="g8o-9W-k68" secondAttribute="top" constant="140" id="cED-aa-hyl"/>
+                            <constraint firstItem="Lj0-yf-JcJ" firstAttribute="centerX" secondItem="NLG-m0-jb0" secondAttribute="centerX" id="gn7-l4-NVX"/>
+                            <constraint firstItem="sYN-Rt-tlf" firstAttribute="centerX" secondItem="NLG-m0-jb0" secondAttribute="centerX" id="h99-86-mbY"/>
+                            <constraint firstItem="EWd-Y1-cuz" firstAttribute="top" secondItem="fby-64-m7h" secondAttribute="bottom" constant="100" id="jfZ-cY-0ay"/>
+                            <constraint firstItem="ft0-th-Gpv" firstAttribute="centerX" secondItem="NLG-m0-jb0" secondAttribute="centerX" id="nOE-f7-cpi"/>
+                            <constraint firstItem="EWd-Y1-cuz" firstAttribute="centerX" secondItem="NLG-m0-jb0" secondAttribute="centerX" id="rLa-tU-Q0s"/>
+                            <constraint firstItem="Lj0-yf-JcJ" firstAttribute="top" secondItem="EWd-Y1-cuz" secondAttribute="bottom" constant="20" id="srT-J6-Q7x"/>
+                            <constraint firstItem="ft0-th-Gpv" firstAttribute="top" secondItem="sYN-Rt-tlf" secondAttribute="bottom" constant="70" id="wai-6C-Cjd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dateLabel" destination="sYN-Rt-tlf" id="F3v-7o-qip"/>
+                        <outlet property="emailLabel" destination="Lj0-yf-JcJ" id="iDv-g1-Jic"/>
+                        <outlet property="logoutButton" destination="ft0-th-Gpv" id="lk5-J7-Xrp"/>
+                        <outlet property="nameLabel" destination="EWd-Y1-cuz" id="DjP-iv-kNa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zcV-hp-ytn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="119" y="-24"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

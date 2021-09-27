@@ -8,6 +8,18 @@
 import UIKit
 import Firebase
 
+struct User {
+    let name: String
+    let email: String
+    let createdAt: Timestamp
+    
+    init(dic: [String: Any]) {
+        name = dic["name"] as! String
+        email = dic["email"] as! String
+        createdAt = dic["createdAt"] as! Timestamp
+    }
+}
+
 final class ViewController: UIViewController {
     
     @IBOutlet weak var registerButton: UIButton!
@@ -82,18 +94,42 @@ final class ViewController: UIViewController {
                 return
             }
         }
+        addUserInfoToFirestore(email: email)
         
+    }
+    
+    private func addUserInfoToFirestore(email: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let name = self.userNameTextField.text else { return }
         
         let docDate = [ "name": name, "email": email, "createdAt": Timestamp()] as [String : Any]
         // コレクションは"uesrs" ドキュメントにuid  Dateにname、email、時間
-        Firestore.firestore().collection("users").document(uid).setData(docDate) { (error) in
+        let userRef = Firestore.firestore().collection("users").document(uid)
+        
+        userRef.setData(docDate) { (error) in
             if let error = error {
                 print("Firestoreへの認証に失敗しました。\(error)")
                 return
             }
             print("Firestoreへの保存に成功しました。")
+            
+            userRef.getDocument { (snapshot, error) in
+                if let error = error {
+                    print("ユーザー情報の取得に失敗しました。")
+                    return
+                }
+                guard let date = snapshot?.data() else { return }
+                let user = User.init(dic: date)
+                print("ユーザー情報の取得に成功しました。\(user.name)")
+//                
+//                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+//                let homeViewController = storyboard.instantiateInitialViewController()
+//                self.present(homeViewController!, animated: true, completion: nil)
+                
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let homeViewController = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
+                self.present(homeViewController, animated: true, completion: nil)
+            }
         }
     }
     
