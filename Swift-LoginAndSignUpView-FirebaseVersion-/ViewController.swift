@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import PKHUD
 
 struct User {
     let name: String
@@ -41,6 +42,30 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         // キーボード無くなる時の通知を受け取る
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+   @IBAction private func tappedRegistarButton(_ sender: Any) {
+        handleAuthToFirebase()
+    }
+    
+    private func handleAuthToFirebase() {
+        // インジケータ回す
+        HUD.show(.progress, onView: view)
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (response, error) in
+            if let error = error {
+                print("認証情報の保存に失敗しました。\(error)")
+                // インジケータ 失敗時
+                HUD.hide { (_) in
+                    HUD.flash(.error, delay: 1)
+                }
+                return
+            }
+        }
+        addUserInfoToFirestore(email: email)
+        
     }
     
     private func setUpGradientLayer() {
@@ -80,24 +105,6 @@ final class ViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @IBAction private func tappedRegistarButton(_ sender: Any) {
-        handleAuthToFirebase()
-    }
-    
-    private func handleAuthToFirebase() {
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (response, error) in
-            if let error = error {
-                print("認証情報の保存に失敗しました。\(error)")
-                return
-            }
-        }
-        addUserInfoToFirestore(email: email)
-        
-    }
-    
     private func addUserInfoToFirestore(email: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let name = self.userNameTextField.text else { return }
@@ -109,6 +116,10 @@ final class ViewController: UIViewController {
         userRef.setData(docDate) { (error) in
             if let error = error {
                 print("Firestoreへの認証に失敗しました。\(error)")
+                // インジケータ 失敗時
+                HUD.hide { (_) in
+                    HUD.flash(.error, delay: 1)
+                }
                 return
             }
             print("Firestoreへの保存に成功しました。")
@@ -116,26 +127,39 @@ final class ViewController: UIViewController {
             userRef.getDocument { (snapshot, error) in
                 if let error = error {
                     print("ユーザー情報の取得に失敗しました。")
+                    // インジケータ 失敗時
+                    HUD.hide { (_) in
+                        HUD.flash(.error, delay: 1)
+                    }
                     return
                 }
                 guard let date = snapshot?.data() else { return }
                 let user = User.init(dic: date)
                 print("ユーザー情報の取得に成功しました。\(user.name)")
-//                
-//                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-//                let homeViewController = storyboard.instantiateInitialViewController()
-//                self.present(homeViewController!, animated: true, completion: nil)
+                // インジケータ 成功時
+                HUD.hide { (_) in
+                    HUD.flash(.success, onView: self.view, delay: 1) { [self] (_) in
+                        self.segueToHomeViewController(user: user)
+                    }
+                }
                 
-                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                let homeViewController = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
-                self.present(homeViewController, animated: true, completion: nil)
             }
         }
     }
     
+    private func segueToHomeViewController(user: User) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let homeViewController = storyboard.instantiateViewController(identifier: "HomeViewController") as! HomeViewController
+        homeViewController.user = user
+        homeViewController.modalPresentationStyle = .fullScreen
+        self.present(homeViewController, animated: true, completion: nil)
+        // instantiateInitialViewController使用時
+        //                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //                let homeViewController = storyboard.instantiateInitialViewController()
+        //                self.present(homeViewController!, animated: true, completion: nil)
+    }
+    
 }
-
-
 
 extension ViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {

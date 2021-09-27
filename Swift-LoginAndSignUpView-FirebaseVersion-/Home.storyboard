@@ -51,6 +51,9 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" red="0.82352941180000006" green="0.94509803920000002" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedLogout:" destination="cpk-mR-qdj" eventType="touchUpInside" id="e92-jE-g3T"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g8o-9W-k68"/>
