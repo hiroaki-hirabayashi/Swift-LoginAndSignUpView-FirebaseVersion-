@@ -21,7 +21,7 @@ struct User {
     }
 }
 
-final class ViewController: UIViewController {
+final class SignUpViewController: UIViewController {
     
     @IBOutlet weak var registerButton: UIButton!
     @IBOutlet weak var userNameTextField: UITextField!
@@ -44,8 +44,23 @@ final class ViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
    @IBAction private func tappedRegistarButton(_ sender: Any) {
         handleAuthToFirebase()
+    }
+    
+    @IBAction func tappedReadyHaveAccountButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let LoginViewController = storyboard.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        navigationController?.pushViewController(LoginViewController, animated: true)
+        // instantiateInitialViewController使用時
+        //                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //                let homeViewController = storyboard.instantiateInitialViewController()
+        //                self.present(homeViewController!, animated: true, completion: nil)
     }
     
     private func handleAuthToFirebase() {
@@ -161,7 +176,7 @@ final class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITextFieldDelegate {
+extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let userNameIsEmpty = userNameTextField.text?.isEmpty ?? true
         let emailIsEmpty = emailTextField.text?.isEmpty ?? true

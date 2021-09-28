@@ -13,10 +13,12 @@
 		F4743490270108F300F24DD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F474348F270108F300F24DD1 /* GoogleService-Info.plist */; };
 		F47434B127019F6E00F24DD1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47434B027019F6D00F24DD1 /* Home.storyboard */; };
 		F47434B62701A19A00F24DD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47434B52701A19A00F24DD1 /* HomeViewController.swift */; };
+		F47434DC2702A99500F24DD1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47434DB2702A99500F24DD1 /* Login.storyboard */; };
+		F47434E12702AAE700F24DD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47434E02702AAE700F24DD1 /* LoginViewController.swift */; };
 		F489CF8426FE5128002F54B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489CF8326FE5128002F54B5 /* AppDelegate.swift */; };
 		F489CF8626FE5128002F54B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489CF8526FE5128002F54B5 /* SceneDelegate.swift */; };
-		F489CF8826FE5128002F54B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489CF8726FE5128002F54B5 /* ViewController.swift */; };
-		F489CF8B26FE5128002F54B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F489CF8926FE5128002F54B5 /* Main.storyboard */; };
+		F489CF8826FE5128002F54B5 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F489CF8726FE5128002F54B5 /* SignUpViewController.swift */; };
+		F489CF8B26FE5128002F54B5 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F489CF8926FE5128002F54B5 /* SignUp.storyboard */; };
 		F489CF8E26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F489CF8C26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodeld */; };
 		F489CF9026FE512B002F54B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F489CF8F26FE512B002F54B5 /* Assets.xcassets */; };
 		F489CF9326FE512B002F54B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F489CF9126FE512B002F54B5 /* LaunchScreen.storyboard */; };
@@ -53,11 +55,13 @@
 		F474348F270108F300F24DD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F47434B027019F6D00F24DD1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		F47434B52701A19A00F24DD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F47434DB2702A99500F24DD1 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		F47434E02702AAE700F24DD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F489CF8026FE5128002F54B5 /* Swift-LoginAndSignUpView-FirebaseVersion-.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swift-LoginAndSignUpView-FirebaseVersion-.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F489CF8326FE5128002F54B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F489CF8526FE5128002F54B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F489CF8726FE5128002F54B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F489CF8A26FE5128002F54B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F489CF8726FE5128002F54B5 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		F489CF8A26FE5128002F54B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SignUp.storyboard; sourceTree = "<group>"; };
 		F489CF8D26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodel; sourceTree = "<group>"; };
 		F489CF8F26FE512B002F54B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F489CF9226FE512B002F54B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -149,15 +153,17 @@
 			children = (
 				F489CF8326FE5128002F54B5 /* AppDelegate.swift */,
 				F489CF8526FE5128002F54B5 /* SceneDelegate.swift */,
-				F489CF8726FE5128002F54B5 /* ViewController.swift */,
+				F489CF8726FE5128002F54B5 /* SignUpViewController.swift */,
 				F47434B52701A19A00F24DD1 /* HomeViewController.swift */,
-				F489CF8926FE5128002F54B5 /* Main.storyboard */,
+				F489CF8926FE5128002F54B5 /* SignUp.storyboard */,
 				F489CF8F26FE512B002F54B5 /* Assets.xcassets */,
 				F489CF9126FE512B002F54B5 /* LaunchScreen.storyboard */,
 				F489CF9426FE512B002F54B5 /* Info.plist */,
 				F489CF8C26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodeld */,
 				F474348F270108F300F24DD1 /* GoogleService-Info.plist */,
 				F47434B027019F6D00F24DD1 /* Home.storyboard */,
+				F47434DB2702A99500F24DD1 /* Login.storyboard */,
+				F47434E02702AAE700F24DD1 /* LoginViewController.swift */,
 			);
 			path = "Swift-LoginAndSignUpView-FirebaseVersion-";
 			sourceTree = "<group>";
@@ -290,9 +296,10 @@
 			files = (
 				F4743490270108F300F24DD1 /* GoogleService-Info.plist in Resources */,
 				F47434B127019F6E00F24DD1 /* Home.storyboard in Resources */,
+				F47434DC2702A99500F24DD1 /* Login.storyboard in Resources */,
 				F489CF9326FE512B002F54B5 /* LaunchScreen.storyboard in Resources */,
 				F489CF9026FE512B002F54B5 /* Assets.xcassets in Resources */,
-				F489CF8B26FE5128002F54B5 /* Main.storyboard in Resources */,
+				F489CF8B26FE5128002F54B5 /* SignUp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,9 +427,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F47434E12702AAE700F24DD1 /* LoginViewController.swift in Sources */,
 				F47434B62701A19A00F24DD1 /* HomeViewController.swift in Sources */,
 				F489CF8E26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodeld in Sources */,
-				F489CF8826FE5128002F54B5 /* ViewController.swift in Sources */,
+				F489CF8826FE5128002F54B5 /* SignUpViewController.swift in Sources */,
 				F489CF8426FE5128002F54B5 /* AppDelegate.swift in Sources */,
 				F489CF8626FE5128002F54B5 /* SceneDelegate.swift in Sources */,
 			);
@@ -460,12 +468,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F489CF8926FE5128002F54B5 /* Main.storyboard */ = {
+		F489CF8926FE5128002F54B5 /* SignUp.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F489CF8A26FE5128002F54B5 /* Base */,
 			);
-			name = Main.storyboard;
+			name = SignUp.storyboard;
 			sourceTree = "<group>";
 		};
 		F489CF9126FE512B002F54B5 /* LaunchScreen.storyboard */ = {

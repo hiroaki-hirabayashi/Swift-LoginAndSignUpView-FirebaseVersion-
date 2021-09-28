@@ -36,6 +36,18 @@ class HomeViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        confirmLoginUser()
+    }
+    
+    private func confirmLoginUser() {
+        // 初期でHomeに行くが、ログインしているかの判定処理が走る ログインしていなければSignUpViewに
+        if Auth.auth().currentUser?.uid == nil || user == nil {
+            segueToSingUpViewController()
+        }
+    }
+    
     @IBAction func tappedLogout(_ sender: Any) {
         handleLogout()
     }
@@ -43,7 +55,7 @@ class HomeViewController: UIViewController {
     private func handleLogout() {
         do {
             try Auth.auth().signOut()
-            dismiss(animated: true, completion: nil)
+            segueToSingUpViewController()
         } catch (let error) {
             print("ログアウトに失敗しました。\(error)")
         }
@@ -58,5 +70,18 @@ class HomeViewController: UIViewController {
         return formatter.string(from: date)
     }
     
+    private func segueToSingUpViewController() {
+        let storyboard = UIStoryboard(name: "SignUp", bundle: nil)
+        let SignUpViewController = storyboard.instantiateViewController(identifier: "SignUpViewController") as! SignUpViewController
+        let navigationController = UINavigationController(rootViewController: SignUpViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+        
+        
+        // instantiateInitialViewController使用時
+        //                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //                let homeViewController = storyboard.instantiateInitialViewController()
+        //                self.present(homeViewController!, animated: true, completion: nil)
+    }
     
 }
