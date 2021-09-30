@@ -10,6 +10,7 @@
 		16F4A13381158459DD6BF61D /* Pods_Swift_LoginAndSignUpView_FirebaseVersion__Swift_LoginAndSignUpView_FirebaseVersion_UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16B8399F3F80612D138C19DA /* Pods_Swift_LoginAndSignUpView_FirebaseVersion__Swift_LoginAndSignUpView_FirebaseVersion_UITests.framework */; };
 		47781F92FA2C8A2179AEB7D5 /* Pods_Swift_LoginAndSignUpView_FirebaseVersion_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F68533EA63D12D972A78E9C1 /* Pods_Swift_LoginAndSignUpView_FirebaseVersion_Tests.framework */; };
 		D86173235CF3C750A488CDA4 /* Pods_Swift_LoginAndSignUpView_FirebaseVersion_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BE37D9CC7FEB7CDC354F274 /* Pods_Swift_LoginAndSignUpView_FirebaseVersion_.framework */; };
+		F40BDB532703FEFC009097D6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40BDB522703FEFC009097D6 /* User.swift */; };
 		F4743490270108F300F24DD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F474348F270108F300F24DD1 /* GoogleService-Info.plist */; };
 		F47434B127019F6E00F24DD1 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F47434B027019F6D00F24DD1 /* Home.storyboard */; };
 		F47434B62701A19A00F24DD1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F47434B52701A19A00F24DD1 /* HomeViewController.swift */; };
@@ -52,6 +53,7 @@
 		E6B7393F965669E205410CA2 /* Pods-Swift-LoginAndSignUpView-FirebaseVersion-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-LoginAndSignUpView-FirebaseVersion-Tests.debug.xcconfig"; path = "Target Support Files/Pods-Swift-LoginAndSignUpView-FirebaseVersion-Tests/Pods-Swift-LoginAndSignUpView-FirebaseVersion-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E8F84A6096CFC82F6659DB22 /* Pods-Swift-LoginAndSignUpView-FirebaseVersion-.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-LoginAndSignUpView-FirebaseVersion-.release.xcconfig"; path = "Target Support Files/Pods-Swift-LoginAndSignUpView-FirebaseVersion-/Pods-Swift-LoginAndSignUpView-FirebaseVersion-.release.xcconfig"; sourceTree = "<group>"; };
 		EDD4B56CF788621445951809 /* Pods-Swift-LoginAndSignUpView-FirebaseVersion--Swift-LoginAndSignUpView-FirebaseVersion-UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swift-LoginAndSignUpView-FirebaseVersion--Swift-LoginAndSignUpView-FirebaseVersion-UITests.release.xcconfig"; path = "Target Support Files/Pods-Swift-LoginAndSignUpView-FirebaseVersion--Swift-LoginAndSignUpView-FirebaseVersion-UITests/Pods-Swift-LoginAndSignUpView-FirebaseVersion--Swift-LoginAndSignUpView-FirebaseVersion-UITests.release.xcconfig"; sourceTree = "<group>"; };
+		F40BDB522703FEFC009097D6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F474348F270108F300F24DD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F47434B027019F6D00F24DD1 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		F47434B52701A19A00F24DD1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +128,34 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F40BDB462703FCF9009097D6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F489CF8726FE5128002F54B5 /* SignUpViewController.swift */,
+				F47434E02702AAE700F24DD1 /* LoginViewController.swift */,
+				F47434B52701A19A00F24DD1 /* HomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F40BDB472703FD28009097D6 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F489CF8926FE5128002F54B5 /* SignUp.storyboard */,
+				F47434DB2702A99500F24DD1 /* Login.storyboard */,
+				F47434B027019F6D00F24DD1 /* Home.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		F40BDB512703FEDD009097D6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F40BDB522703FEFC009097D6 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F489CF7726FE5128002F54B5 = {
 			isa = PBXGroup;
 			children = (
@@ -151,19 +181,16 @@
 		F489CF8226FE5128002F54B5 /* Swift-LoginAndSignUpView-FirebaseVersion- */ = {
 			isa = PBXGroup;
 			children = (
+				F40BDB512703FEDD009097D6 /* Model */,
+				F40BDB472703FD28009097D6 /* Storyboard */,
+				F40BDB462703FCF9009097D6 /* Controller */,
 				F489CF8326FE5128002F54B5 /* AppDelegate.swift */,
 				F489CF8526FE5128002F54B5 /* SceneDelegate.swift */,
-				F489CF8726FE5128002F54B5 /* SignUpViewController.swift */,
-				F47434B52701A19A00F24DD1 /* HomeViewController.swift */,
-				F489CF8926FE5128002F54B5 /* SignUp.storyboard */,
 				F489CF8F26FE512B002F54B5 /* Assets.xcassets */,
 				F489CF9126FE512B002F54B5 /* LaunchScreen.storyboard */,
 				F489CF9426FE512B002F54B5 /* Info.plist */,
 				F489CF8C26FE5128002F54B5 /* Swift_LoginAndSignUpView_FirebaseVersion_.xcdatamodeld */,
 				F474348F270108F300F24DD1 /* GoogleService-Info.plist */,
-				F47434B027019F6D00F24DD1 /* Home.storyboard */,
-				F47434DB2702A99500F24DD1 /* Login.storyboard */,
-				F47434E02702AAE700F24DD1 /* LoginViewController.swift */,
 			);
 			path = "Swift-LoginAndSignUpView-FirebaseVersion-";
 			sourceTree = "<group>";
@@ -433,6 +460,7 @@
 				F489CF8826FE5128002F54B5 /* SignUpViewController.swift in Sources */,
 				F489CF8426FE5128002F54B5 /* AppDelegate.swift in Sources */,
 				F489CF8626FE5128002F54B5 /* SceneDelegate.swift in Sources */,
+				F40BDB532703FEFC009097D6 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +640,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S3PW95J64Q;
 				INFOPLIST_FILE = "Swift-LoginAndSignUpView-FirebaseVersion-/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -632,6 +661,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S3PW95J64Q;
 				INFOPLIST_FILE = "Swift-LoginAndSignUpView-FirebaseVersion-/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

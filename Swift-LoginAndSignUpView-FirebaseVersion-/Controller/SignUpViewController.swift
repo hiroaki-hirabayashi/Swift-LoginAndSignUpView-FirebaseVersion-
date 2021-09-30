@@ -7,19 +7,9 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 import PKHUD
-
-struct User {
-    let name: String
-    let email: String
-    let createdAt: Timestamp
-    
-    init(dic: [String: Any]) {
-        name = dic["name"] as! String
-        email = dic["email"] as! String
-        createdAt = dic["createdAt"] as! Timestamp
-    }
-}
 
 final class SignUpViewController: UIViewController {
     
@@ -32,16 +22,8 @@ final class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpGradientLayer()
-
-        registerButton.isEnabled = false
-        userNameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        // キーボード出現時の通知を受け取る
-        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        // キーボード無くなる時の通知を受け取る
-        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setUpView()
+        setUpKeyboardNotificationObserver()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,18 +31,21 @@ final class SignUpViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-   @IBAction private func tappedRegistarButton(_ sender: Any) {
-        handleAuthToFirebase()
+    private func setUpView() {
+        registerButton.isEnabled = false
+        registerButton.layer.cornerRadius = 10
+        registerButton.backgroundColor = UIColor.rgb(red: 255, green: 221, blue: 187)
+        
+        userNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
     }
     
-    @IBAction func tappedReadyHaveAccountButton(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let LoginViewController = storyboard.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
-        navigationController?.pushViewController(LoginViewController, animated: true)
-        // instantiateInitialViewController使用時
-        //                let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        //                let homeViewController = storyboard.instantiateInitialViewController()
-        //                self.present(homeViewController!, animated: true, completion: nil)
+    private func setUpKeyboardNotificationObserver() {
+        // キーボード出現時の通知を受け取る
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        // キーボード無くなる時の通知を受け取る
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func handleAuthToFirebase() {
@@ -80,10 +65,23 @@ final class SignUpViewController: UIViewController {
             }
         }
         addUserInfoToFirestore(email: email)
-        
     }
     
-    private func setUpGradientLayer() {
+   @IBAction private func tappedRegistarButton(_ sender: Any) {
+        handleAuthToFirebase()
+    }
+    
+    @IBAction func tappedReadyHaveAccountButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let LoginViewController = storyboard.instantiateViewController(identifier: "LoginViewController") as! LoginViewController
+        navigationController?.pushViewController(LoginViewController, animated: true)
+        // instantiateInitialViewController使用時
+        //                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //                let homeViewController = storyboard.instantiateInitialViewController()
+        //                self.present(homeViewController!, animated: true, completion: nil)
+    }
+    
+   private func setUpGradientLayer() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [#colorLiteral(red: 0.9294117647, green: 0.5921568627, blue: 0.3921568627, alpha: 1).cgColor, #colorLiteral(red: 0.8901960784, green: 0.1960784314, blue: 0.3098039216, alpha: 1).cgColor]
         gradientLayer.locations = [0.0, 0.8]
@@ -120,6 +118,7 @@ final class SignUpViewController: UIViewController {
         self.view.endEditing(true)
     }
     
+    // Firestoreにユーザー情報を保存
     private func addUserInfoToFirestore(email: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let name = self.userNameTextField.text else { return }
@@ -128,7 +127,7 @@ final class SignUpViewController: UIViewController {
         // コレクションは"uesrs" ドキュメントにuid  Dateにname、email、時間
         let userRef = Firestore.firestore().collection("users").document(uid)
         
-        userRef.setData(docDate) { (error) in
+        userRef.setData(docDate) { [self] (error) in
             if let error = error {
                 print("Firestoreへの認証に失敗しました。\(error)")
                 // インジケータ 失敗時
@@ -138,28 +137,34 @@ final class SignUpViewController: UIViewController {
                 return
             }
             print("Firestoreへの保存に成功しました。")
+            fetchUserInfoFromFirestore(userRef: userRef)
             
-            userRef.getDocument { (snapshot, error) in
-                if let error = error {
-                    print("ユーザー情報の取得に失敗しました。")
-                    // インジケータ 失敗時
-                    HUD.hide { (_) in
-                        HUD.flash(.error, delay: 1)
-                    }
-                    return
-                }
-                guard let date = snapshot?.data() else { return }
-                let user = User.init(dic: date)
-                print("ユーザー情報の取得に成功しました。\(user.name)")
-                // インジケータ 成功時
-                HUD.hide { (_) in
-                    HUD.flash(.success, onView: self.view, delay: 1) { [self] (_) in
-                        self.segueToHomeViewController(user: user)
-                    }
-                }
-                
-            }
         }
+    }
+    
+    // Firestoreからユーザー情報を取得
+    private func fetchUserInfoFromFirestore(userRef: DocumentReference) {
+        userRef.getDocument { (snapshot, error) in
+            if let error = error {
+                print("ユーザー情報の取得に失敗しました。")
+                // インジケータ 失敗時
+                HUD.hide { (_) in
+                    HUD.flash(.error, delay: 1)
+                }
+                return
+            }
+            guard let date = snapshot?.data() else { return }
+            let user = User.init(dic: date)
+            print("ユーザー情報の取得に成功しました。\(user.name)")
+            // インジケータ 成功時
+            HUD.hide { (_) in
+                HUD.flash(.success, onView: self.view, delay: 1) { [self] (_) in
+                    self.segueToHomeViewController(user: user)
+                }
+            }
+            
+        }
+        
     }
     
     private func segueToHomeViewController(user: User) {
@@ -176,6 +181,7 @@ final class SignUpViewController: UIViewController {
     
 }
 
+// MARK: - UITextFieldDelegate
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let userNameIsEmpty = userNameTextField.text?.isEmpty ?? true

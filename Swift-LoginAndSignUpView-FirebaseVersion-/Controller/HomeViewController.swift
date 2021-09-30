@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseAuth
+import FirebaseFirestore
 
 class HomeViewController: UIViewController {
     
@@ -42,7 +44,7 @@ class HomeViewController: UIViewController {
     }
     
     private func confirmLoginUser() {
-        // 初期でHomeに行くが、ログインしているかの判定処理が走る ログインしていなければSignUpViewに
+        // 初期でHomeに行く ログインしているかの判定処理が走る ログインしていなければSignUpViewに
         if Auth.auth().currentUser?.uid == nil || user == nil {
             segueToSingUpViewController()
         }

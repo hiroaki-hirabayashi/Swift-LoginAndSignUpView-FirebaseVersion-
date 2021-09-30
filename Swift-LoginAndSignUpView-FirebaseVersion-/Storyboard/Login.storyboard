@@ -74,6 +74,10 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedDontHaveAccountButton:" destination="5Ph-OU-trf" eventType="touchUpInside" id="7cj-Oj-jXT"/>
+                                    <action selector="tappedLoginButton:" destination="5Ph-OU-trf" eventType="touchUpInside" id="uDj-kV-5rB"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEo-Hc-aUQ">
                                 <rect key="frame" x="45.5" y="586" width="323.5" height="30"/>
@@ -108,6 +112,12 @@
                             <constraint firstItem="mPJ-8p-2fP" firstAttribute="trailing" secondItem="92K-tk-4gE" secondAttribute="trailing" constant="60" id="zyC-rL-e1c"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="dontHaveAccountButton" destination="qdx-1c-9CY" id="vgr-QP-K4Y"/>
+                        <outlet property="emailTextField" destination="Nhs-WV-78U" id="KwD-gm-LAJ"/>
+                        <outlet property="loginButton" destination="qdx-1c-9CY" id="KND-G5-7Hq"/>
+                        <outlet property="passwordTextField" destination="PWc-9R-4Us" id="zpI-e7-KHe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoN-ZC-M29" sceneMemberID="firstResponder"/>
             </objects>
